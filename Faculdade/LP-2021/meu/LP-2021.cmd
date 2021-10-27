@@ -1,0 +1,1 @@
+"C:\Program Files\Java\jdk-11.0.11\bin\java" -cp "D:\Downloads\cyan\cyan.lang.jar";"D:\Downloads\cyan";"c:\C\java-for-LP-2021";"D:\Downloads\cyan\cyanruntime.jar"  main.Project

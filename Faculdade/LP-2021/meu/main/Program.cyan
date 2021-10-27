@@ -1,0 +1,85 @@
+package main
+@doc{*
+    Lucas Henrique de Araujo
+*}
+
+object Program
+    
+    func run {
+        var Int@restrictTo{* self >= 0 && self <= 2 *} maos;
+        maos = 0;
+        var Int teste = @eval("cyan.lang", "Int"){*
+            return 1;
+        *};
+        printexpr teste + 1;
+        var ok = false;
+        { 
+            maos = -1;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+        if ok == false {
+            @callUnaryMethods(".*ELevantar");
+        }
+        
+        ok = false;
+        { 
+            maos = maos + 1;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+        if ok == false {
+            @callUnaryMethods(".*ELevantar");
+        }
+
+        "Foram levantados $dedos dedos." println;
+    }
+
+    @shout
+    func mindinhoELevantar {
+        printexpr dedos + 1;
+        dedos = dedos + 1;
+        var String currentmethodfullname = @compilationInfo("currentmethodfullname");
+        assert currentmethodfullname == "mindinhoDLevantar";
+        let ok = currentmethodfullname == "MINDINHOELEVANTAR";
+        assert ok;
+    }
+    func anelarELevantar {
+        dedos = dedos + 1;
+        var String currentmethodfullname = @compilationInfo("currentmethodfullname");
+        "$currentmethodfullname foi chamado com sucesso" println;
+    }
+    func meioELevantar {
+        dedos = dedos + 1;
+        var String currentmethodfullname = @compilationInfo("currentmethodfullname");
+        "$currentmethodfullname foi chamado com sucesso" println;
+    }
+    func indicadorELevantar {
+        dedos = dedos + 1;
+        var String currentmethodfullname = @compilationInfo("currentmethodfullname");
+        "$currentmethodfullname foi chamado com sucesso" println;
+    }
+    func polegarELevantar {
+        dedos = dedos + 1;
+        var String currentmethodfullname = @compilationInfo("currentmethodfullname");
+        "$currentmethodfullname foi chamado com sucesso" println;
+    }
+    func mindinhoDLevantar {
+        dedos = dedos + 1
+    }
+    func anelarDLevantar {
+        dedos = dedos + 1
+    }
+    func meioDLevantar {
+        dedos = dedos + 1
+    }
+    func indicadorDLevantar {
+        dedos = dedos + 1
+    }
+    func polegarDLevantar {
+        dedos = dedos + 1
+    }
+    var Int@range(0, 10) dedos = 0;
+end

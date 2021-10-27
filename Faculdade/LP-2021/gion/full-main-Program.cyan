@@ -1,0 +1,103 @@
+package main
+@doc{*
+    Victoria Resende
+*}
+
+object Program
+    
+    func run {
+        var Int@restrictTo{* self >= 0 && self < 4 *} recemnascido;
+
+        recemnascido = 0;
+
+        var Int teste = @eval("cyan.lang", "Int"){*
+            return 1;
+        *};
+
+        printexpr teste + 3;
+
+        var ok = false;
+        { 
+            recemnascido = teste + 3;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+        if ok == false {
+            @callUnaryMethods(".*Contar");
+        }
+        if ok == true {
+            @callUnaryMethods(".*Crescer");
+        }
+
+        ok = false;
+        { 
+            recemnascido = recemnascido + 1;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+        if ok == false {
+            @callUnaryMethods(".*Crescer");
+            @callUnaryMethods(".*Contar");
+        }
+    }
+
+    func CrescerAmbos {
+        printexpr bebe + 1;
+        bebe = bebe + 1;
+        printexpr crianca + 1;
+        crianca = crianca + 1;
+        
+        "Ambos cresceram." println;
+    }
+
+    func Contar {
+        var String metodo = @compilationInfo#parsing("currentmethodfullname");
+        "Metodo $metodo foi chamado";
+    }
+
+    func CrescerBebe {
+        bebe = bebe + 1
+    }
+
+    func CrescerCrianca {
+        crianca = crianca + 1
+    }
+
+    func ContarBebe {
+        "O bebe tem $bebe anos." println;
+    }
+
+    func ContarCrianca {
+        "A crianca tem $crianca anos." println;
+    }
+
+    var Int@range(0, 4) bebe = 0;
+    var Int@range(5, 11) crianca = 5;
+ @pushCompilationContextStatement(pp0, pp) 
+
+    // Methods added by the compiler
+    override    func prototype -> Program {
+        @javacode{* return prototype;
+        *}
+    } 
+ @popCompilationContext(pp0) 
+ @pushCompilationContextStatement(new1, new) 
+    // Methods added by the compiler
+
+    override    func clone -> Program {
+        @javacode<<*
+        try {
+            return (_Program ) this.clone(); 
+        } catch (CloneNotSupportedException e) { }
+        return null;
+        *>>    } 
+    func init { } 
+
+    func new -> Program {
+        @javacode<**< 
+            return new _Program();        >**>
+    }
+ @popCompilationContext(new1) 
+end

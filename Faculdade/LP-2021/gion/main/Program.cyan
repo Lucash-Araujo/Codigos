@@ -1,0 +1,88 @@
+package main
+@doc{*
+    Victoria Resende
+*}
+
+object Program
+    
+    func run {
+        var Int@restrictTo{* self >= 0 && self < 4 *} recemnascido;
+
+        recemnascido = 0;
+
+        var Int teste = @eval("cyan.lang", "Int"){*
+            return 0;
+        *};
+
+        printexpr teste + 2;
+
+        var ok = false;
+        { 
+            recemnascido = teste + 2;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+        if ok == false {
+            @callUnaryMethods(".*Contar.*");
+        }
+        if ok == true {
+            @callUnaryMethods(".*Crescer.*");
+        }
+
+        ok = false;
+        { 
+            recemnascido = recemnascido + 1;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+
+        ok = false;
+        { 
+            recemnascido = recemnascido + 1;
+        } catch: { (: CyException e :) 
+            ok = true
+        };
+        assert ok;
+
+        
+        @callUnaryMethods(".*Crescer.*");
+        @callUnaryMethods(".*Contar.*");
+
+    }
+
+    @shout
+    func CrescerAmbos {
+        printexpr bebe + 1;
+        bebe = bebe + 1;
+        printexpr crianca + 1;
+        crianca = crianca + 1;
+        
+        "Ambos cresceram." println;
+    }
+
+    func Contar {
+        var String metodo = @compilationInfo("currentmethodfullname");
+        "Metodo $metodo foi chamado." println;
+    }
+
+    func CrescerBebe {
+        bebe = bebe + 1
+    }
+
+    func CrescerCrianca {
+        crianca = crianca + 1
+    }
+
+    func ContarBebe {
+        "O bebe tem $bebe anos." println;
+    }
+
+    func ContarCrianca {
+        "A crianca tem $crianca anos." println;
+    }
+
+    var Int@range(0, 4) bebe = 0;
+    var Int@range(5, 11) crianca = 5;
+end

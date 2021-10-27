@@ -1,0 +1,1 @@
+void cadastrar_cliente_menu(char *cpf, char *nome, char *nascimento, char *email, char *celular) {
